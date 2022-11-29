@@ -1,0 +1,6 @@
+body{
+    padding-top: 50px;
+    flex-grow: 1;
+    background: linear-gradient(90deg, #5041b2 0%, #7969e6 100%);
+    box-sizing: border-box;
+}

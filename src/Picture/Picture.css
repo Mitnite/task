@@ -1,0 +1,52 @@
+.Picture {
+    display: block;
+    padding: 10px;
+    width: 350px;
+    margin: 15px auto;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14);
+    transition: border, box-shadow .3s;
+}
+
+.Picture:hover {
+    border: 1px solid #aaa;
+    box-shadow: 0 4px 15px 0 rgba(0, 0, 0, .4);
+}
+
+.button_delete {
+    display: inline-block;
+    color: red;
+    margin: 0 90%;
+    background-color: rgba(0, 125, 215, 0.01);
+    border: 0;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.like {
+    background-image: url("../img/like.png");
+    background-color: rgba(0, 125, 215, 0.01);
+    height: 50px;
+    width: 50px;
+    background-size: 100%;
+    border: 0;
+    cursor: pointer;
+    transition: background-image .4s;
+    display: block;
+    margin: 20px auto;
+
+}
+
+.liked {
+    background-image: url("../img/liked.png");
+    transition: background-image .4s;
+}
+
+.Picture img{
+    height: 250px;
+    width: 250px;
+    display: block;
+    margin: 0 auto;
+}
+
