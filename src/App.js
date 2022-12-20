@@ -25,6 +25,8 @@ class App extends Component {
     let pics = this.props.posts.map((posts, index) => {
       return (
           <Picture
+
+              
               key={index}
               name={posts.title}
               state={posts.liked}
