@@ -5,13 +5,13 @@ import Picture from "./Picture/Picture";
 import {listFetchData} from "./redux/actions/list";
 
 class App extends Component {
-
   componentDidMount() {
-    this.props.fetchData("https://jsonplaceholder.typicode.com/albums/1/photos")
+    this.props.fetchData("https://www.metmuseum.org/api/collection/collectionlisting?perPage=100&offset=0");
   }
 
   state = {
-    clicked: false
+    clicked: false,
+    n: 0
   }
 
   onSort = () => {
@@ -20,20 +20,32 @@ class App extends Component {
     })
   }
 
+  loaderHandler = () => {
+    let m = this.state.n + 10
+    this.props.fetchData("https://www.metmuseum.org/api/collection/collectionlisting?perPage=100&offset=" + m)
+    this.setState({
+      n: m
+    })
+  }
+
 
   render() {
-    let pics = this.props.posts.map((posts, index) => {
-      return (
-          <Picture
-              key={index}
-              name={posts.title}
-              state={posts.liked}
-              url={posts.url}
-              onLike={() => this.props.onLike(index)}
-              onDelete={() => this.props.onDelete(index)}
-          />
-      )
-    })
+    let pics
+    let n
+    if (this.props.posts) {
+      pics = this.props.posts.map((posts, index) => {
+        return (
+            <Picture
+                key={index}
+                name={posts.title}
+                state={posts.liked}
+                url={posts.image}
+                onLike={() => this.props.onLike(index)}
+                onDelete={() => this.props.onDelete(index)}
+            />
+        )
+      })
+    }
     let pics_liked = this.props.posts.map((posts, index) => {
       if (posts.liked) {
         return (
@@ -41,7 +53,7 @@ class App extends Component {
                 key={index}
                 name={posts.title}
                 state={posts.liked}
-                url={posts.url}
+                url={posts.image}
                 onLike={() => this.props.onLike(index)}
                 onDelete={() => this.props.onDelete(index)}
             />
@@ -51,21 +63,30 @@ class App extends Component {
     return (
         <div className={'App'}>
           <div>
-            <h1>Список карточек</h1>
-            <button onClick={this.onSort} className={'button_sort'}>Сортировать</button>
+            <div className={'navigation'}>
+              <h1>Список карточек</h1>
+              <button onClick={this.onSort} className={'button_sort'}>Сортировать</button>
+            </div>
+            <div className={'picture'}>
             {this.state.clicked
                 ? pics_liked
                 : pics
+            }
+            </div>
+            {!this.state.clicked
+                ? <button className={'button_sort'} onClick={this.loaderHandler}>Показать ещё</button>
+                : null
             }
           </div>
         </div>
     );
   }
+
 }
 
 function mapStateToProps(state) {
   return {
-    posts: state.posts,
+    posts: state.posts
   }
 }
 
