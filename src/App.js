@@ -60,12 +60,13 @@ class App extends Component {
       } else return null
     })
     return (
-        <div className={'App'}>
-          <div>
-            <div className={'navigation'}>
-              <h1>Список карточек</h1>
-              <button onClick={this.onSort} className={'button_sort'}>Сортировать</button>
-            </div>
+        <div >
+          <div className={'navigation'}>
+            <h1>Список карточек</h1>
+            <button onClick={this.onSort} className={'button_sort'}>Сортировать</button>
+          </div>
+          <div className={'App'}>
+            <div>
             <div className={'picture'}>
             {this.state.clicked
                 ? pics_liked
@@ -76,6 +77,7 @@ class App extends Component {
                 ? <button className={'button_sort'} onClick={this.loaderHandler}>Показать ещё</button>
                 : null
             }
+            </div>
           </div>
         </div>
     );
