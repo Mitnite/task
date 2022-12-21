@@ -31,7 +31,6 @@ class App extends Component {
 
   render() {
     let pics
-    let n
     if (this.props.posts) {
       pics = this.props.posts.map((posts, index) => {
         return (
